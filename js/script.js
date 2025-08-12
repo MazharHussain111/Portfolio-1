@@ -490,50 +490,84 @@ const PROJECTS_DATA = {
       }
     });
   }
+ /* ====================== */
+/* THEME SYSTEM */
+/* ====================== */
+
+/**
+ * Initialize theme functionality with URL support
+ */
+function initThemeSystem() {
+  const themeToggle = document.querySelector('.theme-toggle');
+  const html = document.documentElement;
   
-  /* ====================== */
-  /* THEME SYSTEM */
-  /* ====================== */
+  // Check for URL theme parameter first
+  const urlParams = new URLSearchParams(window.location.search);
+  const urlTheme = urlParams.get('theme');
   
-  /**
-   * Initialize theme functionality
-   */
-  function initThemeSystem() {
-    const themeToggle = document.querySelector('.theme-toggle');
-    const html = document.documentElement;
-    
-    // Check for saved theme preference or use OS preference
-    const savedTheme = localStorage.getItem('theme') || 
-                      (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    
-    // Apply the saved theme
-    applyTheme(savedTheme);
-    
-    // Toggle theme on button click
-    if (themeToggle) {
-      themeToggle.addEventListener('click', () => {
-        const currentTheme = html.getAttribute('data-theme');
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        applyTheme(newTheme);
-        localStorage.setItem('theme', newTheme);
-      });
-    }
+  // Then check for saved theme preference or use OS preference
+  const savedTheme = urlTheme || 
+                    localStorage.getItem('theme') || 
+                    (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  
+  // Apply the theme
+  applyTheme(savedTheme);
+  
+  // Update URL without reloading the page
+  updateThemeUrl(savedTheme);
+  
+  // Toggle theme on button click
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = html.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      applyTheme(newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateThemeUrl(newTheme);
+    });
   }
   
-  /**
-   * Apply theme to the document
-   * @param {string} theme - Theme to apply ('light' or 'dark')
-   */
-  function applyTheme(theme) {
-    const html = document.documentElement;
-    
-    if (theme === 'dark') {
-      html.setAttribute('data-theme', 'dark');
-    } else {
-      html.removeAttribute('data-theme');
-    }
+  // Watch for URL changes (back/forward navigation)
+  window.addEventListener('popstate', () => {
+    const params = new URLSearchParams(window.location.search);
+    const theme = params.get('theme') || 
+                 localStorage.getItem('theme') || 
+                 (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    applyTheme(theme);
+  });
+}
+
+/**
+ * Apply theme to the document
+ * @param {string} theme - Theme to apply ('light' or 'dark')
+ */
+function applyTheme(theme) {
+  const html = document.documentElement;
+  
+  if (theme === 'dark') {
+    html.setAttribute('data-theme', 'dark');
+  } else {
+    html.removeAttribute('data-theme');
+  }
+}
+
+/**
+ * Update URL with theme parameter without reloading
+ * @param {string} theme - Current theme ('light' or 'dark')
+ */
+function updateThemeUrl(theme) {
+  const url = new URL(window.location);
+  
+  // Remove theme parameter if it's the default (light)
+  if (theme === 'light') {
+    url.searchParams.delete('theme');
+  } else {
+    url.searchParams.set('theme', theme);
   }
   
+  // Update URL without reloading
+  window.history.replaceState({}, '', url);
+}
   
   
   /**
