@@ -495,79 +495,64 @@ const PROJECTS_DATA = {
 /* ====================== */
 
 /**
- * Initialize theme functionality with URL support
+ * Initialize theme functionality
  */
 function initThemeSystem() {
-  const themeToggle = document.querySelector('.theme-toggle');
-  const html = document.documentElement;
-  
-  // Check for URL theme parameter first
-  const urlParams = new URLSearchParams(window.location.search);
-  const urlTheme = urlParams.get('theme');
-  
-  // Then check for saved theme preference or use OS preference
-  const savedTheme = urlTheme || 
-                    localStorage.getItem('theme') || 
-                    (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-  
-  // Apply the theme
-  applyTheme(savedTheme);
-  
-  // Update URL without reloading the page
-  updateThemeUrl(savedTheme);
-  
-  // Toggle theme on button click
-  if (themeToggle) {
-    themeToggle.addEventListener('click', () => {
-      const currentTheme = html.getAttribute('data-theme');
-      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-      applyTheme(newTheme);
-      localStorage.setItem('theme', newTheme);
-      updateThemeUrl(newTheme);
-    });
+    const themeToggle = document.querySelector('.theme-toggle');
+    const html = document.documentElement;
+    
+    // Check URL first for theme parameter, then localStorage, then OS preference
+    const urlParams = new URLSearchParams(window.location.search);
+    let savedTheme = urlParams.get('theme');
+    
+    if (!savedTheme) {
+      savedTheme = localStorage.getItem('theme') || 
+                  (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    }
+    
+    // Apply the saved theme and update URL
+    applyTheme(savedTheme);
+    
+    // Toggle theme on button click
+    if (themeToggle) {
+      themeToggle.addEventListener('click', () => {
+        const currentTheme = html.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        applyTheme(newTheme);
+        localStorage.setItem('theme', newTheme);
+        
+        // Update URL with current theme
+        updateUrlWithTheme(newTheme);
+      });
+    }
   }
   
-  // Watch for URL changes (back/forward navigation)
-  window.addEventListener('popstate', () => {
-    const params = new URLSearchParams(window.location.search);
-    const theme = params.get('theme') || 
-                 localStorage.getItem('theme') || 
-                 (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    applyTheme(theme);
-  });
-}
-
-/**
- * Apply theme to the document
- * @param {string} theme - Theme to apply ('light' or 'dark')
- */
-function applyTheme(theme) {
-  const html = document.documentElement;
-  
-  if (theme === 'dark') {
-    html.setAttribute('data-theme', 'dark');
-  } else {
-    html.removeAttribute('data-theme');
-  }
-}
-
-/**
- * Update URL with theme parameter without reloading
- * @param {string} theme - Current theme ('light' or 'dark')
- */
-function updateThemeUrl(theme) {
-  const url = new URL(window.location);
-  
-  // Remove theme parameter if it's the default (light)
-  if (theme === 'light') {
-    url.searchParams.delete('theme');
-  } else {
+  /**
+   * Update URL with theme parameter without page reload
+   * @param {string} theme - Theme to set in URL ('light' or 'dark')
+   */
+  function updateUrlWithTheme(theme) {
+    const url = new URL(window.location.href);
     url.searchParams.set('theme', theme);
+    window.history.replaceState({}, '', url.toString());
   }
   
-  // Update URL without reloading
-  window.history.replaceState({}, '', url);
-}
+  /**
+   * Apply theme to the document
+   * @param {string} theme - Theme to apply ('light' or 'dark')
+   */
+  function applyTheme(theme) {
+    const html = document.documentElement;
+    
+    if (theme === 'dark') {
+      html.setAttribute('data-theme', 'dark');
+    } else {
+      html.removeAttribute('data-theme');
+    }
+    
+    // Update URL to reflect current theme
+    updateUrlWithTheme(theme);
+  }
   
   
   /**
