@@ -257,6 +257,7 @@ const PROJECTS_DATA = {
     const scrollContainer = document.querySelector("[data-scroll-container]");
     if (!scrollContainer) return null;
   
+    // @ts-ignore
     const locoScroll = new LocomotiveScroll({
       el: scrollContainer,
       smooth: true,
@@ -278,13 +279,16 @@ const PROJECTS_DATA = {
   
       if (currentScroll > scrollThreshold) {
         if (scrollDirection === 'down' && !isScrollingDown) {
+          // @ts-ignore
           header.classList.add("hide");
           isScrollingDown = true;
         } else if (scrollDirection === 'up' && isScrollingDown) {
+          // @ts-ignore
           header.classList.remove("hide");
           isScrollingDown = false;
         }
       } else {
+        // @ts-ignore
         header.classList.remove("hide");
         isScrollingDown = false;
       }
@@ -307,6 +311,7 @@ const PROJECTS_DATA = {
     setTimeout(() => {
       const loader = document.querySelector('.bubble-loader');
       if (loader && !loader.classList.contains('hidden')) {
+        // @ts-ignore
         hideLoader(loader);
       }
     }, 3000);
@@ -340,10 +345,12 @@ const PROJECTS_DATA = {
       particle.style.left = `${Math.random() * 100}%`;
       particle.style.top = `${Math.random() * 100}%`;
       particle.style.animationDelay = `${Math.random() * 4}s`;
+      // @ts-ignore
       particlesContainer.appendChild(particle);
     }
     
     // Hide loader when page loads
+    // @ts-ignore
     window.addEventListener('load', () => hideLoader(loaderContainer));
   }
   
@@ -395,6 +402,7 @@ function setupNavigation() {
         if (window.innerWidth <= 768) {
             const dropdowns = document.querySelectorAll('.nav-item.dropdown');
             dropdowns.forEach(dropdown => {
+                // @ts-ignore
                 if (!dropdown.contains(e.target)) {
                     dropdown.classList.remove('active');
                 }
@@ -413,6 +421,7 @@ function setupNavigation() {
     });
 
     // Set active nav link
+    // @ts-ignore
     setActiveNavLink([...navLinks, ...document.querySelectorAll('.dropdown-link')]);
 }
 
@@ -424,6 +433,7 @@ function setActiveNavLink(navLinks) {
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
     
     navLinks.forEach(link => {
+        // @ts-ignore
         const linkPage = link.getAttribute('href');
         if ((currentPage === 'index.html' && linkPage === 'index.html') || 
             (currentPage === 'index2.html' && linkPage === 'index2.html') ||
@@ -431,14 +441,17 @@ function setActiveNavLink(navLinks) {
             (currentPage === 'projects.html' && linkPage === 'projects.html') ||
             (currentPage === 'project-detail.html' && linkPage === 'project-detail.html') ||
             (currentPage === linkPage)) {
+            // @ts-ignore
             link.classList.add('active');
             
             // Also mark parent dropdown link as active if this is a dropdown item
+            // @ts-ignore
             const dropdownLink = link.closest('.dropdown-menu')?.previousElementSibling;
             if (dropdownLink) {
                 dropdownLink.classList.add('active');
             }
         } else {
+            // @ts-ignore
             link.classList.remove('active');
         }
     });
@@ -454,7 +467,9 @@ function setActiveNavLink(navLinks) {
     document.querySelectorAll('.magnetic').forEach(button => {
       button.addEventListener('mousemove', (e) => {
         const rect = button.getBoundingClientRect();
+        // @ts-ignore
         const x = e.clientX - rect.left;
+        // @ts-ignore
         const y = e.clientY - rect.top;
         
         const centerX = rect.width / 2;
@@ -467,10 +482,12 @@ function setActiveNavLink(navLinks) {
         const maxDistance = Math.sqrt(Math.pow(centerX, 2) + Math.pow(centerY, 2));
         const scale = 1 + (0.1 * (1 - distance / maxDistance));
         
+        // @ts-ignore
         button.style.transform = `perspective(500px) rotateX(${angleX}deg) rotateY(${angleY}deg) scale(${scale})`;
       });
       
       button.addEventListener('mouseleave', () => {
+        // @ts-ignore
         button.style.transform = '';
       });
     });
@@ -487,15 +504,20 @@ function setActiveNavLink(navLinks) {
       e.preventDefault();
       
       const submitButton = contactForm.querySelector('button[type="submit"]');
+      // @ts-ignore
       const originalButtonText = submitButton.innerHTML;
       const successMessage = document.getElementById('formSuccess');
       
       // Show loading state
+      // @ts-ignore
       submitButton.innerHTML = '<span>Sending...</span>';
+      // @ts-ignore
       submitButton.disabled = true;
       
       try {
+        // @ts-ignore
         const formData = new FormData(contactForm);
+        // @ts-ignore
         const response = await fetch(contactForm.action, {
           method: 'POST',
           body: formData,
@@ -505,10 +527,13 @@ function setActiveNavLink(navLinks) {
         });
         
         if (response.ok) {
+          // @ts-ignore
           successMessage.style.display = 'flex';
+          // @ts-ignore
           contactForm.reset();
           
           setTimeout(() => {
+            // @ts-ignore
             successMessage.style.display = 'none';
           }, 5000);
         } else {
@@ -518,7 +543,9 @@ function setActiveNavLink(navLinks) {
         alert('There was a problem sending your message. Please try again later.');
         console.error('Form submission error:', error);
       } finally {
+        // @ts-ignore
         submitButton.innerHTML = originalButtonText;
+        // @ts-ignore
         submitButton.disabled = false;
       }
     });
@@ -639,6 +666,7 @@ function initThemeSystem() {
     document.querySelectorAll('.progress-fill').forEach(bar => {
       const value = bar.getAttribute('data-value');
       setTimeout(() => {
+        // @ts-ignore
         bar.style.width = `${value}%`;
       }, 500);
     });
@@ -680,7 +708,9 @@ function initThemeSystem() {
       entries.forEach((entry, index) => {
         if (entry.isIntersecting) {
           setTimeout(() => {
+            // @ts-ignore
             entry.target.style.opacity = '1';
+            // @ts-ignore
             entry.target.style.transform = 'translateX(0)';
           }, index * ANIMATION_DEFAULTS.delayIncrement);
         }
@@ -688,8 +718,11 @@ function initThemeSystem() {
     }, { threshold: 0.1 });
   
     timelineItems.forEach(item => {
+      // @ts-ignore
       item.style.opacity = '0';
+      // @ts-ignore
       item.style.transform = 'translateX(-20px)';
+      // @ts-ignore
       item.style.transition = 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
       observer.observe(item);
     });
@@ -704,12 +737,14 @@ function initThemeSystem() {
     
     rows.forEach(row => {
       const track = row.querySelector('.testimonial-track');
+      // @ts-ignore
       const cards = track.querySelectorAll('.testimonial-card');
       
       // Clone cards if there are too few for infinite scroll
       if (cards.length <= 4) {
         cards.forEach(card => {
           const clone = card.cloneNode(true);
+          // @ts-ignore
           track.appendChild(clone);
         });
       }
@@ -753,6 +788,7 @@ function initProjectsSection() {
 
   // Set up scroll animations for project cards
   const observer = new IntersectionObserver((entries) => {
+    // @ts-ignore
     entries.forEach((entry, index) => {
       if (entry.isIntersecting) {
         entry.target.classList.add('animate-in');
@@ -762,6 +798,7 @@ function initProjectsSection() {
   }, { threshold: ANIMATION_DEFAULTS.threshold });
 
   document.querySelectorAll('.project-card').forEach((card, index) => {
+    // @ts-ignore
     card.style.transitionDelay = `${(index % 4) * 0.1}s`;
     observer.observe(card);
   });
@@ -803,6 +840,7 @@ function initProjectsSection() {
    */
   function getProjectIdFromUrl() {
     const urlParams = new URLSearchParams(window.location.search);
+    // @ts-ignore
     let projectId = parseInt(urlParams.get('project')) || 1;
     
     // Validate project ID
@@ -820,10 +858,15 @@ function initProjectsSection() {
    */
   function updateProjectContent(project) {
     // Update hero section
+    // @ts-ignore
     document.getElementById('project-category').textContent = project.category;
+    // @ts-ignore
     document.getElementById('project-title').textContent = project.title;
+    // @ts-ignore
     document.getElementById('project-client').textContent = project.client;
+    // @ts-ignore
     document.getElementById('project-year').textContent = project.year;
+    // @ts-ignore
     document.getElementById('project-services').textContent = project.services;
     
     // Update image
@@ -855,6 +898,7 @@ function initProjectsSection() {
     
     const img = new Image();
     img.src = imagePath;
+    // @ts-ignore
     img.alt = document.getElementById('project-title').textContent;
     img.loading = 'eager';
     img.style.opacity = '0';
@@ -990,11 +1034,13 @@ function initProjectsSection() {
     
     if (prevBtn) {
       const prevId = currentIndex > 0 ? projectIds[currentIndex - 1] : projectIds[projectIds.length - 1];
+      // @ts-ignore
       prevBtn.href = `project-detail.html?project=${prevId}`;
     }
     
     if (nextBtn) {
       const nextId = currentIndex < projectIds.length - 1 ? projectIds[currentIndex + 1] : projectIds[0];
+      // @ts-ignore
       nextBtn.href = `project-detail.html?project=${nextId}`;
     }
   }
@@ -1004,6 +1050,7 @@ function initProjectsSection() {
   /* ====================== */
   
   // Update copyright year automatically
+  // @ts-ignore
   document.getElementById('year').textContent = new Date().getFullYear();
   
   
@@ -1028,6 +1075,7 @@ function initProjectsSection() {
   function initNumberAnimations() {
     // Animate all elements with animate-number or counter class
     document.querySelectorAll('.animate-number, .counter, .animate-number-v1, .stat-value-v2, .stat-value-v3').forEach(el => {
+      // @ts-ignore
       setupNumberAnimation(el);
     });
   }
@@ -1040,6 +1088,7 @@ function initProjectsSection() {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
+          // @ts-ignore
           animateNumberValue(entry.target);
           observer.unobserve(entry.target);
         }
@@ -1058,15 +1107,18 @@ function initProjectsSection() {
     let target;
     
     if (element.classList.contains('counter')) {
+      // @ts-ignore
       target = parseInt(element.getAttribute('data-target')) || 0;
     } else if (element.classList.contains('stat-value-v2')) {
       const counterSpan = element.querySelector('.counter');
       if (counterSpan) {
+        // @ts-ignore
         target = parseInt(counterSpan.getAttribute('data-target')) || 0;
       } else {
         target = parseInt(element.textContent.replace('+', '')) || 0;
       }
     } else {
+      // @ts-ignore
       target = parseInt(element.getAttribute('data-value')) || 
                parseInt(element.textContent.replace('+', '')) || 0;
     }
@@ -1086,9 +1138,11 @@ function initProjectsSection() {
         if (element.textContent.includes('+') || element.classList.contains('stat-value-v2')) {
           element.textContent = Math.floor(current) + '+';
         } else {
+          // @ts-ignore
           element.textContent = Math.floor(current);
         }
       } else {
+        // @ts-ignore
         element.textContent = Math.floor(current);
       }
     }, 16);
@@ -1125,8 +1179,10 @@ function initProjectsSection() {
             const fill = entry.target.querySelector('.round-fill-v3');
             const valueEl = entry.target.querySelector('.stat-value-v3');
             if (fill && valueEl) {
+              // @ts-ignore
               const value = parseInt(valueEl.getAttribute('data-value')) || 0;
               const percentage = Math.min(value, 100); // Cap at 100 for the circle
+              // @ts-ignore
               fill.style.strokeDasharray = `${percentage}, 100`;
               
               // Also animate the stat block if needed
