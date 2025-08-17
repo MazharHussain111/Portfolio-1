@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * @file Main JavaScript file for Ahmad Raza's portfolio
  * @description Handles all interactive functionality including animations, navigation, and page-specific features
