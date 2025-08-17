@@ -34,7 +34,7 @@
     gap: var(--space-lg);
     width: max-content;
     will-change: transform;
-    padding: 10px 0; /* Prevents clipping of box-shadows */
+    padding: 10px 0;
 }
 
 /* Animation Directions */
@@ -150,80 +150,3 @@
 .testimonial-row:hover .testimonial-track {
     animation-play-state: paused;
 }
-
-/* ====================== */
-/* RESPONSIVE ADJUSTMENTS */
-/* ====================== */
-
-/* Tablet Breakpoint (1024px) */
-@media (max-width: 1024px) {
-    .testimonial-card {
-        flex: 0 0 350px;
-        padding: var(--space-lg);
-    }
-    
-    .testimonial-quote {
-        font-size: var(--text-md);
-    }
-    
-    .author-avatar {
-        width: 45px;
-        height: 45px;
-    }
-}
-
-/* Mobile Breakpoint (768px) */
-@media (max-width: 768px) {
-    .testimonial-card {
-        flex: 0 0 300px;
-        padding: var(--space-md);
-    }
-    
-    .testimonial-quote {
-        font-size: var(--text-base);
-        padding-left: var(--space-sm);
-    }
-    
-    .testimonial-quote::before {
-        left: -8px;
-        font-size: 2.5em;
-    }
-    
-    .author-avatar {
-        width: 40px;
-        height: 40px;
-    }
-    
-    .testimonials-section {
-        padding: var(--space-xl) 0;
-    }
-}
-
-/* Small Mobile Breakpoint (480px) */
-@media (max-width: 480px) {
-    .testimonial-card {
-        flex: 0 0 280px;
-    }
-    
-    .testimonial-quote {
-        font-size: var(--text-sm);
-    }
-    
-    .author-name {
-        font-size: var(--text-sm);
-    }
-    
-    .author-title {
-        font-size: var(--text-xs);
-    }
-    
-    .rating i {
-        font-size: var(--text-xs);
-    }
-    
-    .testimonial-rows {
-        gap: var(--space-md);
-    }
-}
-
-

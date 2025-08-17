@@ -1,5 +1,5 @@
 /* ====================== */
-/* PROJECTS SECTION STYLES - ENHANCED */
+/* PROJECTS SECTION STYLES -  */
 /* ====================== */
 .projects-section {
     position: relative;
@@ -147,62 +147,5 @@
 .view-all-btn {
     margin-top: var(--space-xl);
     text-align: center;
-}
-
-/* ====================== */
-/* RESPONSIVE ADJUSTMENTS */
-/* ====================== */
-@media (max-width: 1024px) {
-    .projects-grid {
-        gap: var(--space-lg);
-    }
-    
-    .project-info {
-        padding: var(--space-md);
-    }
-}
-
-@media (max-width: 768px) {
-    .projects-section {
-        padding: var(--space-xl) 0;
-    }
-    
-    /* Switch to single column on mobile */
-    .projects-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .project-name {
-        font-size: var(--text-lg);
-    }
-    
-    .project-info {
-        transform: translateY(0);
-        opacity: 1;
-        background: linear-gradient(
-            to top,
-            rgba(var(--ebony-rgb), 0.95) 0%,
-            rgba(var(--ebony-rgb), 0.85) 70%,
-            rgba(var(--ebony-rgb), 0) 100%
-        );
-    }
-    
-
-}
-
-@media (max-width: 480px) {
-    .project-info {
-        padding: var(--space-md);
-    }
-    
-    .project-category {
-        font-size: 0.65rem;
-    }
-    
-    .project-name {
-        font-size: var(--text-md);
-    }
-    
-
 }
 
