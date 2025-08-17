@@ -38,35 +38,58 @@
 
 <!-- Header  -->
 <header class="header">
-    <div class="header-container">
-        <!-- Logo with image -->
-        <a href="index1.html" class="logo">
-            <img src="images/logo.png" alt="Alexander Stone Logo" class="logo-image">
-            <span class="logo-text">Ahmad Raza</span>
-            <span class="logo-badge">AR</span>
-        </a>
+  <div class="header-container">
+    <!-- Logo with image -->
+    <a href="index1.html" class="logo">
+      <img src="images/logo.png" alt="Ahmad Raza Logo" class="logo-image">
+      <span class="logo-text">Ahmad Raza</span>
+      <span class="logo-badge">AR</span>
+    </a>
 
-        <nav class="nav">
-            <ul class="nav-list">
-                <li class="nav-item"><a href="index1.html" class="nav-link active" data-text="Home">Home</a></li>
-                <li class="nav-item"><a href="about.html" class="nav-link" data-text="About">About</a></li>
-                <li class="nav-item"><a href="services.html" class="nav-link" data-text="Services">Services</a></li>
-                <li class="nav-item"><a href="resume.html" class="nav-link" data-text="Resume">Resume</a></li>
-                <li class="nav-item"><a href="projects.html" class="nav-link" data-text="Work">Projects</a></li>
-                <li class="nav-item"><a href="contact.html" class="nav-link" data-text="Contact">Contact</a></li>
-            </ul>
+    <nav class="nav">
+      <ul class="nav-list">
+        <li class="nav-item dropdown">
+          <span class="nav-link active" data-text="Home">
+            <span>Home</span>
+            <i class="fas fa-chevron-down dropdown-icon"></i>
+          </span>
+          <ul class="dropdown-menu">
+            <li><a href="index1.html" class="dropdown-link">Home 1</a></li>
+            <li><a href="index2.html" class="dropdown-link">Home 2</a></li>
+            <li><a href="index3.html" class="dropdown-link">Home 3</a></li>
+          </ul>
+        </li>
+        
+        <li class="nav-item"><a href="about.html" class="nav-link" data-text="About">About</a></li>
+        <li class="nav-item"><a href="services.html" class="nav-link" data-text="Services">Services</a></li>
+        <li class="nav-item"><a href="resume.html" class="nav-link" data-text="Resume">Resume</a></li>
+        
+        <!-- Projects Dropdown -->
+        <li class="nav-item dropdown">
+          <span class="nav-link" data-text="Projects">
+            <span>Projects</span>
+            <i class="fas fa-chevron-down dropdown-icon"></i>
+          </span>
+          <ul class="dropdown-menu">
+            <li><a href="projects.html" class="dropdown-link">Projects</a></li>
+            <li><a href="project-detail.html" class="dropdown-link">Project Detail</a></li>
+          </ul>
+        </li>
+        
+        <li class="nav-item"><a href="contact.html" class="nav-link" data-text="Contact">Contact</a></li>
+      </ul>
 
-            <!-- Add theme toggle button -->
-            <button class="theme-toggle" aria-label="Toggle theme">
-                <i class="fas fa-moon"></i>
-                <i class="fas fa-sun"></i>
-            </button>
+      <!-- Theme toggle button -->
+      <button class="theme-toggle" aria-label="Toggle theme">
+        <i class="fas fa-moon"></i>
+        <i class="fas fa-sun"></i>
+      </button>
 
-            <button class="nav-toggle" aria-label="Toggle navigation">
-                <span class="hamburger"></span>
-            </button>
-        </nav>
-    </div>
+      <button class="nav-toggle" aria-label="Toggle navigation">
+        <span class="hamburger"></span>
+      </button>
+    </nav>
+  </div>
 </header>
 
 

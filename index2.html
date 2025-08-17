@@ -38,35 +38,58 @@
 
 <!-- Header  -->
 <header class="header">
-    <div class="header-container">
-        <!-- Logo with image -->
-        <a href="index1.html" class="logo">
-            <img src="images/logo.png" alt="Alexander Stone Logo" class="logo-image">
-            <span class="logo-text">Ahmad Raza</span>
-            <span class="logo-badge">AR</span>
-        </a>
+  <div class="header-container">
+    <!-- Logo with image -->
+    <a href="index1.html" class="logo">
+      <img src="images/logo.png" alt="Ahmad Raza Logo" class="logo-image">
+      <span class="logo-text">Ahmad Raza</span>
+      <span class="logo-badge">AR</span>
+    </a>
 
-        <nav class="nav">
-            <ul class="nav-list">
-                <li class="nav-item"><a href="index1.html" class="nav-link active" data-text="Home">Home</a></li>
-                <li class="nav-item"><a href="about.html" class="nav-link" data-text="About">About</a></li>
-                <li class="nav-item"><a href="services.html" class="nav-link" data-text="Services">Services</a></li>
-                <li class="nav-item"><a href="resume.html" class="nav-link" data-text="Resume">Resume</a></li>
-                <li class="nav-item"><a href="projects.html" class="nav-link" data-text="Work">Projects</a></li>
-                <li class="nav-item"><a href="contact.html" class="nav-link" data-text="Contact">Contact</a></li>
-            </ul>
+    <nav class="nav">
+      <ul class="nav-list">
+        <li class="nav-item dropdown">
+          <span class="nav-link active" data-text="Home">
+            <span>Home</span>
+            <i class="fas fa-chevron-down dropdown-icon"></i>
+          </span>
+          <ul class="dropdown-menu">
+            <li><a href="index1.html" class="dropdown-link">Home 1</a></li>
+            <li><a href="index2.html" class="dropdown-link">Home 2</a></li>
+            <li><a href="index3.html" class="dropdown-link">Home 3</a></li>
+          </ul>
+        </li>
+        
+        <li class="nav-item"><a href="about.html" class="nav-link" data-text="About">About</a></li>
+        <li class="nav-item"><a href="services.html" class="nav-link" data-text="Services">Services</a></li>
+        <li class="nav-item"><a href="resume.html" class="nav-link" data-text="Resume">Resume</a></li>
+        
+        <!-- Projects Dropdown -->
+        <li class="nav-item dropdown">
+          <span class="nav-link" data-text="Projects">
+            <span>Projects</span>
+            <i class="fas fa-chevron-down dropdown-icon"></i>
+          </span>
+          <ul class="dropdown-menu">
+            <li><a href="projects.html" class="dropdown-link">Projects</a></li>
+            <li><a href="project-detail.html" class="dropdown-link">Project Detail</a></li>
+          </ul>
+        </li>
+        
+        <li class="nav-item"><a href="contact.html" class="nav-link" data-text="Contact">Contact</a></li>
+      </ul>
 
-            <!-- Add theme toggle button -->
-            <button class="theme-toggle" aria-label="Toggle theme">
-                <i class="fas fa-moon"></i>
-                <i class="fas fa-sun"></i>
-            </button>
+      <!-- Theme toggle button -->
+      <button class="theme-toggle" aria-label="Toggle theme">
+        <i class="fas fa-moon"></i>
+        <i class="fas fa-sun"></i>
+      </button>
 
-            <button class="nav-toggle" aria-label="Toggle navigation">
-                <span class="hamburger"></span>
-            </button>
-        </nav>
-    </div>
+      <button class="nav-toggle" aria-label="Toggle navigation">
+        <span class="hamburger"></span>
+      </button>
+    </nav>
+  </div>
 </header>
 
 <!-- Home Section demo2   -->
@@ -139,7 +162,7 @@
                 <div class="visual-blob-v2">
                     <div class="blob-shape-v2"></div>
                     <div class="blob-image-v2">
-                        <img src="images/profile_img.jpg" alt="Alexander Stone" class="profile-img-v2">
+                        <img src="images/profile-2.jpg" alt="Alexander Stone" class="profile-img-v2">
                     </div>
                 </div>
                 
@@ -200,7 +223,7 @@
                     <div class="visual-container">
                         <div class="image-parallax" data-scroll data-scroll-speed="0.5">
                             <div class="image-mask">
-                                <img src="images/profile_img.jpg" alt="Alexander Stone" class="about-image">
+                                <img src="images/profile-2.jpg" alt="Alexander Stone" class="about-image">
                             </div>
                             
                             <!-- Floating Decorations -->
@@ -368,8 +391,8 @@
         </div>
     </section>
 
-    <!-- Resume/Experience Section -->
-    <section class="section" id="resume" data-scroll-section>
+    <!-- Resume Section -->
+    <section class="section resume-section" id="resume" data-scroll-section>
         <div class="section-container">
             <!-- Watermark Background -->
             <div class="section-watermark">EXPERIENCE</div>
@@ -378,33 +401,36 @@
             <div class="section-header">
                 <span class="section-subtitle text-reveal">Professional Journey</span>
                 <h2 class="heading-2 text-reveal delay-1">My Resume</h2>
-                <p class="text-lead text-reveal delay-2">18+ years of leadership in creative direction and digital design</p>
+                <p class="text-lead text-reveal delay-2">My professional experience and qualifications</p>
             </div>
 
+
+
             <!-- Experience Timeline -->
-            <div class="resume-section">
+            <div class="resume-container">
                 <h3 class="heading-3 slide-in-left">Professional Experience</h3>
 
                 <div class="timeline">
                     <!-- Timeline Item 1 -->
                     <div class="timeline-item">
                         <div class="timeline-period">
-                            <span>2020 - Present</span>
+                            <span>2022 - Present</span>
                             <div class="timeline-badge"></div>
                         </div>
                         <div class="timeline-content">
-                            <h4 class="heading-4">Executive Creative Director</h4>
-                            <p class="text-small">Digital Innovations Inc., New York</p>
+                            <h4 class="heading-4">Senior Kotlin Developer</h4>
+                            <p class="text-small">Tech Solutions Inc., New York</p>
                             <ul class="timeline-list">
-                                <li>Lead a team of 25+ designers, developers, and content creators</li>
-                                <li>Developed brand strategies for Fortune 500 clients</li>
-                                <li>Increased client retention by 42% through innovative solutions</li>
-                                <li>Pioneered AI-assisted design workflows</li>
+                                <li>Lead development of Android applications using Kotlin and Jetpack Compose</li>
+                                <li>Implemented clean architecture principles and MVVM pattern</li>
+                                <li>Optimized app performance, reducing crash rate by 40%</li>
+                                <li>Mentored junior developers and conducted code reviews</li>
                             </ul>
                             <div class="timeline-tags">
-                                <span>Creative Direction</span>
-                                <span>Team Leadership</span>
-                                <span>Brand Strategy</span>
+                                <span>Kotlin</span>
+                                <span>Android SDK</span>
+                                <span>Jetpack Compose</span>
+                                <span>Clean Architecture</span>
                             </div>
                         </div>
                     </div>
@@ -412,22 +438,23 @@
                     <!-- Timeline Item 2 -->
                     <div class="timeline-item">
                         <div class="timeline-period">
-                            <span>2015 - 2020</span>
+                            <span>2019 - 2022</span>
                             <div class="timeline-badge"></div>
                         </div>
                         <div class="timeline-content">
-                            <h4 class="heading-4">Senior Creative Director</h4>
-                            <p class="text-small">BrandVision Agency, San Francisco</p>
+                            <h4 class="heading-4">Android Developer</h4>
+                            <p class="text-small">Mobile Innovations, San Francisco</p>
                             <ul class="timeline-list">
-                                <li>Oversaw all creative output for West Coast division</li>
-                                <li>Developed award-winning campaigns for tech startups</li>
-                                <li>Reduced project timelines by 30% with new processes</li>
-                                <li>Mentored junior designers through training programs</li>
+                                <li>Developed and maintained enterprise Android applications</li>
+                                <li>Integrated RESTful APIs and implemented offline caching</li>
+                                <li>Collaborated with UI/UX designers to implement pixel-perfect interfaces</li>
+                                <li>Implemented automated testing using Espresso and JUnit</li>
                             </ul>
                             <div class="timeline-tags">
-                                <span>Art Direction</span>
-                                <span>UX Design</span>
-                                <span>Campaign Strategy</span>
+                                <span>Android</span>
+                                <span>Retrofit</span>
+                                <span>Room</span>
+                                <span>Coroutines</span>
                             </div>
                         </div>
                     </div>
@@ -435,22 +462,71 @@
                     <!-- Timeline Item 3 -->
                     <div class="timeline-item">
                         <div class="timeline-period">
-                            <span>2010 - 2015</span>
+                            <span>2017 - 2019</span>
                             <div class="timeline-badge"></div>
                         </div>
                         <div class="timeline-content">
-                            <h4 class="heading-4">Creative Director</h4>
-                            <p class="text-small">PixelForge Studios, Chicago</p>
+                            <h4 class="heading-4">Junior Android Developer</h4>
+                            <p class="text-small">AppWorks, Chicago</p>
                             <ul class="timeline-list">
-                                <li>Built and managed creative team from 5 to 15 members</li>
-                                <li>Developed agency's signature visual style</li>
-                                <li>Won 12 industry awards including 3 Webby Awards</li>
-                                <li>Established partnerships with major tech platforms</li>
+                                <li>Assisted in developing and testing Android applications</li>
+                                <li>Fixed bugs and improved application performance</li>
+                                <li>Participated in agile development processes</li>
+                                <li>Learned best practices in mobile development</li>
                             </ul>
                             <div class="timeline-tags">
-                                <span>Visual Design</span>
-                                <span>Brand Identity</span>
-                                <span>Digital Strategy</span>
+                                <span>Java</span>
+                                <span>XML</span>
+                                <span>Firebase</span>
+                                <span>Git</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Education Section -->
+                <h3 class="heading-3 slide-in-left" style="margin-top: var(--space-xxl);">Education</h3>
+
+                <div class="timeline">
+                    <!-- Education Item 1 -->
+                    <div class="timeline-item">
+                        <div class="timeline-period">
+                            <span>2013 - 2017</span>
+                            <div class="timeline-badge"></div>
+                        </div>
+                        <div class="timeline-content">
+                            <h4 class="heading-4">Bachelor of Science in Computer Science</h4>
+                            <p class="text-small">University of Technology, New York</p>
+                            <ul class="timeline-list">
+                                <li>Specialized in Mobile Application Development</li>
+                                <li>Graduated with Honors (GPA: 3.8/4.0)</li>
+                                <li>Senior Project: Developed campus navigation Android app</li>
+                            </ul>
+                            <div class="timeline-tags">
+                                <span>Algorithms</span>
+                                <span>Data Structures</span>
+                                <span>Mobile Development</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Education Item 2 -->
+                    <div class="timeline-item">
+                        <div class="timeline-period">
+                            <span>2011 - 2013</span>
+                            <div class="timeline-badge"></div>
+                        </div>
+                        <div class="timeline-content">
+                            <h4 class="heading-4">Associate Degree in Software Engineering</h4>
+                            <p class="text-small">City College, New York</p>
+                            <ul class="timeline-list">
+                                <li>Focus on programming fundamentals</li>
+                                <li>Developed first Android app as part of coursework</li>
+                            </ul>
+                            <div class="timeline-tags">
+                                <span>Programming</span>
+                                <span>Database</span>
+                                <span>Web Basics</span>
                             </div>
                         </div>
                     </div>

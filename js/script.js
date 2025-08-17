@@ -37,7 +37,7 @@ const PROJECTS_DATA = {
       year: "2023",
       client: "Nexus Technologies",
       services: "Creative Direction, Brand Strategy, Visual Design",
-      image: "images/project1.jpg",
+      image: "images/project-1.jpg",
       overview: "Comprehensive rebrand for tech startup including logo, visual system, and brand guidelines.",
       challenge: "Sought to translate their innovative technology into a visual identity that would:",
       challengePoints: [
@@ -69,7 +69,6 @@ const PROJECTS_DATA = {
       technicalSpecs: [
         { label: "Logo Formats", value: "Vector, Responsive, Animated" },
         { label: "Color System", value: "Primary, Secondary, Accents" },
-        { label: "Typography", value: "Custom Typeface, Google Fonts" },
         { label: "Deliverables", value: "Brand Guidelines, Assets" }
       ]
     },
@@ -79,7 +78,7 @@ const PROJECTS_DATA = {
       "year": "2024",
       "client": "HealthPlus Wellness",
       "services": "UI/UX Design, Frontend & Backend Development, API Integration",
-      "image": "images/project2.jpg",
+      "image": "images/project-2.jpg",
       "overview": "A cross-platform fitness app with AI-powered workout plans, nutrition tracking, and real-time health analytics.",
       "challenge": "Key challenges included:",
       "challengePoints": [
@@ -111,8 +110,8 @@ const PROJECTS_DATA = {
       "technicalSpecs": [
         { "label": "Platforms", "value": "iOS, Android, Web" },
         { "label": "Tech Stack", "value": "Flutter, Node.js, Firebase" },
-        { "label": "APIs", "value": "Fitbit, Google Health, Stripe" },
-        { "label": "Database", "value": "Firestore, MongoDB" }
+        { "label": "APIs", "value": "Fitbit,, Stripe" },
+   
       ]
     },
     3:{
@@ -121,7 +120,7 @@ const PROJECTS_DATA = {
       "year": "2023",
       "client": "Urban Lifestyle Brands",
       "services": "Frontend Development, Backend Integration, Payment Gateway Setup",
-      "image": "images/project2.jpg",
+      "image": "images/project-3.jpg",
       "overview": "A high-performance e-commerce platform for sustainable fashion brands with multi-vendor support.",
       "challenge": "Primary challenges were:",
       "challengePoints": [
@@ -153,8 +152,8 @@ const PROJECTS_DATA = {
       "technicalSpecs": [
         { "label": "Frontend", "value": "Next.js, Tailwind CSS" },
         { "label": "Backend", "value": "Node.js, Express" },
-        { "label": "Payment", "value": "Stripe, PayPal" },
-        { "label": "Hosting", "value": "AWS EC2, Cloudflare" }
+        { "label": "Payment", "value": "Stripe "}
+
       ]
     },
     4:{
@@ -163,7 +162,7 @@ const PROJECTS_DATA = {
       "year": "2024",
       "client": "Productivity Labs",
       "services": "Full-Stack Development, Database Design, User Analytics",
-      "image": "images/project1.jpg",
+      "image": "images/project-4.jpg",
       "overview": "A collaborative task management tool with Kanban boards, time tracking, and team analytics.",
       "challenge": "Critical hurdles included:",
       "challengePoints": [
@@ -195,7 +194,6 @@ const PROJECTS_DATA = {
       "technicalSpecs": [
         { "label": "Stack", "value": "MongoDB, Express, React, Node.js" },
         { "label": "Auth", "value": "OAuth 2.0, JWT" },
-        { "label": "Deployment", "value": "AWS ECS, CI/CD Pipeline" },
         { "label": "Analytics", "value": "Custom dashboard with D3.js" }
       ]
     }
@@ -360,56 +358,91 @@ const PROJECTS_DATA = {
     }, 300);
   }
   
-  /* ====================== */
-  /* NAVIGATION COMPONENTS */
-  /* ====================== */
-  
-  /**
-   * Setup main navigation functionality
-   */
-  function setupNavigation() {
+/* ====================== */
+/* NAVIGATION COMPONENTS */
+/* ====================== */
+
+/**
+ * Setup main navigation functionality
+ */
+function setupNavigation() {
     const navToggle = document.querySelector('.nav-toggle');
     const navList = document.querySelector('.nav-list');
-    const navLinks = document.querySelectorAll('.nav-link');
-  
+    const navLinks = document.querySelectorAll('.nav-link:not(.dropdown > .nav-link)');
+    
     // Mobile menu toggle
     if (navToggle && navList) {
-      navToggle.addEventListener('click', () => {
-        navToggle.classList.toggle('active');
-        navList.classList.toggle('active');
-      });
+        navToggle.addEventListener('click', () => {
+            navToggle.classList.toggle('active');
+            navList.classList.toggle('active');
+        });
     }
-  
+
+    // Mobile dropdown toggle
+    const dropdownToggles = document.querySelectorAll('.nav-item.dropdown > .nav-link');
+    dropdownToggles.forEach(toggle => {
+        toggle.addEventListener('click', function(e) {
+            if (window.innerWidth <= 768) {
+                e.preventDefault();
+                const dropdown = this.parentElement;
+                dropdown.classList.toggle('active');
+            }
+        });
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+        if (window.innerWidth <= 768) {
+            const dropdowns = document.querySelectorAll('.nav-item.dropdown');
+            dropdowns.forEach(dropdown => {
+                if (!dropdown.contains(e.target)) {
+                    dropdown.classList.remove('active');
+                }
+            });
+        }
+    });
+
     // Close mobile menu when clicking on links
     navLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        if (navList?.classList.contains('active')) {
-          navToggle?.classList.remove('active');
-          navList.classList.remove('active');
-        }
-      });
+        link.addEventListener('click', () => {
+            if (navList?.classList.contains('active')) {
+                navToggle?.classList.remove('active');
+                navList.classList.remove('active');
+            }
+        });
     });
-  
-    // Set active link based on current page
-    setActiveNavLink(navLinks);
-  }
-  
-  /**
-   * Set active navigation link based on current page
-   * @param {NodeList} navLinks - All navigation links
-   */
-  function setActiveNavLink(navLinks) {
+
+    // Set active nav link
+    setActiveNavLink([...navLinks, ...document.querySelectorAll('.dropdown-link')]);
+}
+
+/**
+ * Set active navigation link based on current page
+ * @param {NodeList} navLinks - All navigation links
+ */
+function setActiveNavLink(navLinks) {
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
     
     navLinks.forEach(link => {
-      const linkPage = link.getAttribute('href');
-      if ((currentPage === 'index.html' && linkPage === 'index.html') || 
-          (currentPage === linkPage)) {
-        link.classList.add('active');
-      }
+        const linkPage = link.getAttribute('href');
+        if ((currentPage === 'index.html' && linkPage === 'index.html') || 
+            (currentPage === 'index2.html' && linkPage === 'index2.html') ||
+            (currentPage === 'index3.html' && linkPage === 'index3.html') ||
+            (currentPage === 'projects.html' && linkPage === 'projects.html') ||
+            (currentPage === 'project-detail.html' && linkPage === 'project-detail.html') ||
+            (currentPage === linkPage)) {
+            link.classList.add('active');
+            
+            // Also mark parent dropdown link as active if this is a dropdown item
+            const dropdownLink = link.closest('.dropdown-menu')?.previousElementSibling;
+            if (dropdownLink) {
+                dropdownLink.classList.add('active');
+            }
+        } else {
+            link.classList.remove('active');
+        }
     });
-  }
-  
+}
   /* ====================== */
   /* UI COMPONENTS */
   /* ====================== */
@@ -686,51 +719,53 @@ function initThemeSystem() {
   /**
    * Initialize Projects Section
    */
-  function initProjectsSection() {
-    const projectsGrid = document.querySelector('.projects-grid');
-    if (!projectsGrid) return;
-  
-    // Clear existing content
-    projectsGrid.innerHTML = '';
-  
-    // Create project cards from data
-    Object.entries(PROJECTS_DATA).forEach(([id, project]) => {
-      const projectCard = document.createElement('div');
-      projectCard.className = 'project-card will-animate scale-in';
-      projectCard.dataset.projectId = id;
-      
-      projectCard.innerHTML = `
-        <div class="project-image-container">
-          <img src="${project.image}" alt="${project.title}" class="project-image" loading="lazy">
-        </div>
-        <div class="project-info">
-          <span class="project-category">${project.category}</span>
-          <h3 class="heading-4 project-name">${project.title}</h3>
-          <a href="project-detail.html?project=${id}" class="project-details-btn">
-            <span>View Details</span>
-            <i class="fas fa-arrow-right"></i>
-          </a>
-        </div>
-      `;
-      
-      projectsGrid.appendChild(projectCard);
+
+function initProjectsSection() {
+  const projectsGrid = document.querySelector('.projects-grid');
+  if (!projectsGrid) return;
+
+  // Clear existing content
+  projectsGrid.innerHTML = '';
+
+  // Create project cards from data
+  Object.entries(PROJECTS_DATA).forEach(([id, project]) => {
+    const projectCard = document.createElement('div');
+    projectCard.className = 'project-card will-animate scale-in';
+    projectCard.dataset.projectId = id;
+    
+    projectCard.innerHTML = `
+      <div class="project-image-container">
+        <img src="${project.image}" alt="${project.title}" class="project-image" loading="lazy">
+      </div>
+      <div class="project-info">
+        <span class="project-category">${project.category}</span>
+        <h3 class="heading-4 project-name">${project.title}</h3>
+      </div>
+    `;
+    
+    // Add click event to the entire card
+    projectCard.addEventListener('click', () => {
+      window.location.href = `project-detail.html?project=${id}`;
     });
-  
-    // Set up scroll animations for project cards
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, index) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animate-in');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: ANIMATION_DEFAULTS.threshold });
-  
-    document.querySelectorAll('.project-card').forEach((card, index) => {
-      card.style.transitionDelay = `${(index % 4) * 0.1}s`;
-      observer.observe(card);
+    
+    projectsGrid.appendChild(projectCard);
+  });
+
+  // Set up scroll animations for project cards
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate-in');
+        observer.unobserve(entry.target);
+      }
     });
-  }
+  }, { threshold: ANIMATION_DEFAULTS.threshold });
+
+  document.querySelectorAll('.project-card').forEach((card, index) => {
+    card.style.transitionDelay = `${(index % 4) * 0.1}s`;
+    observer.observe(card);
+  });
+}
   
   /**
    * Check if current page is project detail page
@@ -1081,16 +1116,33 @@ function initThemeSystem() {
       // Blob morph animation is handled by CSS
     }
   
-    // Initialize circular stats for version 3
+    // Initialize circular stats for version 3 with scroll trigger
     const roundStats = document.querySelectorAll('.stat-round-v3');
-    roundStats.forEach((stat, index) => {
-      const fill = stat.querySelector('.round-fill-v3');
-      if (fill) {
-        setTimeout(() => {
-          const value = parseInt(stat.querySelector('.stat-value-v3').getAttribute('data-value')) || 0;
-          const percentage = Math.min(value, 100); // Cap at 100 for the circle
-          fill.style.strokeDasharray = `${percentage}, 100`;
-        }, (index + 1) * 300);
-      }
-    });
+    if (roundStats.length > 0) {
+      const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const fill = entry.target.querySelector('.round-fill-v3');
+            const valueEl = entry.target.querySelector('.stat-value-v3');
+            if (fill && valueEl) {
+              const value = parseInt(valueEl.getAttribute('data-value')) || 0;
+              const percentage = Math.min(value, 100); // Cap at 100 for the circle
+              fill.style.strokeDasharray = `${percentage}, 100`;
+              
+              // Also animate the stat block if needed
+              const statBlock = entry.target.closest('.stat-block-v3');
+              if (statBlock) {
+                statBlock.classList.add('animate-in');
+              }
+            }
+          }
+        });
+      }, { threshold: 0.5 });
+  
+      roundStats.forEach(stat => {
+        statsObserver.observe(stat);
+      });
+    }
   }
+
+  

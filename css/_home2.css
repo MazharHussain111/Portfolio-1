@@ -482,3 +482,89 @@
         justify-content: center;
     }
 }
+/* Updated Stats Container - No Resizing During Animation */
+.home-stats-v2 {
+    display: flex;
+    gap: var(--space-xl);
+    margin-top: var(--space-xl);
+    flex-wrap: wrap;
+}
+
+.stat-block-v2 {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    background: rgba(var(--platinum-rgb), 0.05);
+    backdrop-filter: blur(5px);
+    padding: var(--space-sm) var(--space-md);
+    border-radius: 50px;
+    border: 1px solid rgba(var(--primary-rgb), 0.1);
+    transition: 
+        background 0.4s ease,
+        border-color 0.4s ease,
+        transform 0.4s ease;
+    opacity: 0;
+    transform: translateY(20px);
+    /* Prevent content width changes */
+    min-width: 150px; /* Set a minimum width */
+    box-sizing: border-box;
+}
+
+.stat-block-v2.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.stat-block-v2:hover {
+    background: rgba(var(--primary-rgb), 0.1);
+    border-color: rgba(var(--primary-rgb), 0.3);
+    transform: translateY(-3px) scale(1.05); /* Added scale for better hover effect */
+}
+
+.stat-value-v2 {
+    font-size: var(--text-3xl);
+    font-weight: 700;
+    color: var(--primary);
+    line-height: 1;
+    min-width: 50px; /* Fixed width for numbers */
+    text-align: center;
+}
+
+.stat-details-v2 {
+    display: flex;
+    flex-direction: column;
+    min-width: 80px; /* Fixed width for text content */
+}
+
+.stat-title-v2 {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--platinum);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    white-space: nowrap; /* Prevent text wrapping */
+}
+
+.stat-desc-v2 {
+    font-size: var(--text-xs);
+    color: var(--platinum);
+    opacity: 0.7;
+    white-space: nowrap; /* Prevent text wrapping */
+}
+
+/* Counter Animation - Add this if not present */
+@keyframes counter-fade {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.counter {
+    display: inline-block;
+    animation: counter-fade 0.6s ease-out forwards;
+}

@@ -1,6 +1,3 @@
-
-
-
 /* ====================== */
 /* HEADER SECTION STYLES */
 /* ====================== */
@@ -14,8 +11,6 @@
     -webkit-backdrop-filter: blur(12px);
     transition: all var(--transition-normal) cubic-bezier(0.16, 1, 0.3, 1);
     transform: translateY(0);
-  
-
 }
 
 .header.scrolled {
@@ -161,6 +156,78 @@
     width: 100%;
 }
 
+/* Dropdown Styles */
+.nav-item.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: var(--ebony);
+    border: 1px solid rgba(var(--platinum-rgb), 0.1);
+    border-radius: 4px;
+    padding: var(--space-xs) 0;
+    min-width: 180px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all var(--transition-normal) ease;
+    z-index: 1001;
+    box-shadow: var(--shadow-lg);
+    list-style: none;
+}
+
+.dropdown-menu::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 20px;
+    width: 12px;
+    height: 12px;
+    background: var(--ebony);
+    transform: rotate(45deg);
+    border-top: 1px solid rgba(var(--platinum-rgb), 0.1);
+    border-left: 1px solid rgba(var(--platinum-rgb), 0.1);
+    z-index: -1;
+}
+
+.dropdown-link {
+    display: block;
+    padding: var(--space-xs) var(--space-md);
+    color: var(--platinum);
+    font-size: var(--text-sm);
+    text-decoration: none;
+    transition: all var(--transition-fast) ease;
+}
+
+.dropdown-link:hover {
+    color: var(--primary);
+    background-color: rgba(var(--primary-rgb), 0.1);
+}
+
+.dropdown-icon {
+    margin-left: var(--space-xs);
+    font-size: var(--text-xs);
+    transition: transform var(--transition-fast) ease;
+}
+
+.nav-item.dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.nav-item.dropdown:hover .dropdown-icon {
+    transform: rotate(180deg);
+}
+
+.dropdown-link.active {
+    color: var(--primary);
+    background-color: rgba(var(--primary-rgb), 0.1);
+}
+
 /* Mobile Toggle Button */
 .nav-toggle {
     display: none;
@@ -274,7 +341,8 @@
     .header-container {
         padding: var(--space-sm) var(--space-md);
     }
-       .logo-text {
+    
+    .logo-text {
         display: none;
         position: absolute;
         left: 50px;
@@ -338,8 +406,34 @@
         height: 32px;
     }
     
-    .logo-text {
-        font-size: var(--text-md);
+    /* Mobile dropdown styles */
+    .dropdown-menu {
+        position: static;
+        display: none;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        border: none;
+        padding-left: var(--space-md);
+        background-color: transparent;
+    }
+
+    .dropdown-menu::before {
+        display: none;
+    }
+
+    .dropdown-link {
+        padding: var(--space-xs) 0;
+        font-size: var(--text-sm);
+    }
+
+    .nav-item.dropdown.active .dropdown-menu {
+        display: block;
+    }
+
+    .nav-item.dropdown.active .dropdown-icon {
+        transform: rotate(180deg);
     }
 }
 
@@ -352,8 +446,6 @@
     .logo {
         gap: 0;
     }
-    
- 
     
     .logo-badge {
         position: absolute;
@@ -427,11 +519,6 @@
     .header.hide {
         transform: translateY(-100%);
     }
-    
-    /* Magnetic button adjustment for small screens */
-    .magnetic {
-        transform: none !important;
-    }
 }
 
 /* Scrolled State Adjustments */
@@ -446,6 +533,3 @@
 .header.scrolled .nav-link {
     font-size: var(--text-xs);
 }
-
-
-

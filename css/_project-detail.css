@@ -380,6 +380,10 @@
     .project-title {
         font-size: var(--text-4xl);
     }
+    .category-container{
+        margin-top: 31px;
+    }
+
     
     .project-meta-grid {
         grid-template-columns: 1fr;
